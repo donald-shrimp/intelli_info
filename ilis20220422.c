@@ -62,10 +62,8 @@ int main(void) {
 	FILE *fp; // FILE型構造体
 	char fname[] = "iris.txt";
 	char line[N];
-	char f1[8], f2[8], f3[8], f4[8];
+    int label,unchi = 0;
 	char* tmp[32];
-    int label;
-	int unchi = 0;
  
 	data data[ROW];
  
@@ -80,20 +78,15 @@ int main(void) {
 		count = split(tmp, line, ',');
 		for(int i = 0; i < count; i++){
 			printf("%s\n" ,tmp[i]);
-			data[unchi].iris_data[i]=tnp;
+			if(i==4){
+				data[unchi].iris_label=atof(tmp);
+			}else{
+				data[unchi].iris_data[i]=atof(tmp);
+			}
 		}
-
-	// 	float tmp[] = {f1, f2, f3, f4};
-	// 	for(int j = 0; j  < 4; j++) {
-	// 		data[i].iris_data[j] = tmp[j];
-	// 	}//4つのデータを入力
-		
-    //     data[i].iris_label = label;//ラベルを入力
-		
-    //     i++;
+		printf("now on roop poop:%d\n",&unchi);
+		unchi+=1;
 	}
-	
-
 	fclose(fp); // ファイルを閉じる
 
 // printf("%f,%f,%f,%f,%d\n",&data[1].iris_data[1], &data[1].iris_data[1], &data[1].iris_data[1], &data[1].iris_data[1], &data[1].iris_label);
