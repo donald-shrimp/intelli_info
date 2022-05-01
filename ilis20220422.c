@@ -5,18 +5,15 @@
 #define ROW 150 // 読み込むファイルのデータの行数
 #define SIZE_OF_ARRAY(array)    (sizeof(array)/sizeof(array[0]))
 #define K 1  // kの数
+#define T 1 //tの値
 
 // １．パラメータの設定：データ数，クラス数，特徴空間の次元数，k-最近傍法の k の値など 
 // 1列目の項目名と2列目以降のデータを格納する配列をメンバにもつ構造体
 typedef struct iris {
 	float iris_data[4];
     int iris_label;
+	float distance;
 } data;
- 
-typedef struct match {
-	float distance[4];
-    int label;
-} match;
 
 // ２．Iris.txt のデータの入力
 
@@ -93,8 +90,7 @@ int main(void) {
 
 // ５．k-最近傍法のアルゴリズムで未知データのクラス番号（0,1,2 のいずれか）を決定して，出力する 
 	// int class_counter[3]=0;
-	match result[K];
 	for(i=0;i<150;i++){
-		l = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
+		data[i].distance = (data[i].iris_data[0]-x)*(data[i].iris_data[0]-x) + (data[i].iris_data[1]-y)*(data[i].iris_data[1]-y);
 	}
 }
