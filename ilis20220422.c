@@ -11,7 +11,7 @@
 // 1列目の項目名と2列目以降のデータを格納する配列をメンバにもつ構造体
 typedef struct iris {
 	float iris_data[4];
-    int iris_label;
+  int iris_label;
 	float distance;
 } data;
 
@@ -44,6 +44,13 @@ int split(char *dst[], char *src, char delim){
   return count;
 }
 
+float compar(const void* a, const void* b) {
+    if (((data*)a)->distance > ((data*)b)->distance) { //aより距離が小さければ入れ替え
+        return 1;
+    } else {
+        return -1;
+    }
+}
 
 int main(void) {
 	FILE *fp; // FILE型構造体
@@ -89,8 +96,26 @@ int main(void) {
 	}while(x<xmin||x>xmax||y<ymin||y>ymax);
 
 // ５．k-最近傍法のアルゴリズムで未知データのクラス番号（0,1,2 のいずれか）を決定して，出力する 
-	// int class_counter[3]=0;
-	for(i=0;i<150;i++){
+	printf("a-1");
+  int label_counter[3];
+  printf("a");
+	for(int i=0;i<150;i++){
 		data[i].distance = (data[i].iris_data[0]-x)*(data[i].iris_data[0]-x) + (data[i].iris_data[1]-y)*(data[i].iris_data[1]-y);
-	}
+  }
+
+  printf("b");
+  qsort(data,150,sizeof(data),compar);
+  int most_label;
+  printf("c");
+  for ( int i = 0; i < K; i++){
+    label_counter[data[i].iris_label]++;
+    
+    if (i=0||label_counter[most_label]<label_counter[data[i].iris_label])
+    {
+      most_label=data[i].iris_label;
+    }
+  }
+  printf("d");
+  printf("たぶん%d",most_label);
+
 }
